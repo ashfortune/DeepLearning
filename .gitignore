@@ -37,3 +37,6 @@ runs/
 # 주피터 노트북 체크포인트
 .ipynb_checkpoints/
 run_app.sh
+
+training_records/
+training_records
