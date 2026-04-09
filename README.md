@@ -10,7 +10,7 @@ YOLOv8 딥러닝 모델을 활용하여 사진 속 음식을 자동으로 인식
 본 프로젝트는 현대인의 식습관 관리를 돕기 위해 기획되었습니다. 사용자가 식사 사진을 촬영하거나 업로드하면, 인공지능이 음식의 종류와 개수를 파악하고 공신력 있는 API를 통해 영양 정보를 즉각적으로 제공합니다.
 
 ### 🚀 핵심 기능
-- **YOLOv8 기반 정밀 탐지**: 고성능 객체 탐지 알고리즘을 통해 다양한 음식을 실시간으로 식별합니다.
+- **YOLOv8 기반 정밀 탐지**: 고성능 객체 탐지 알고리즘을 통해 163종의 다양한 음식을 실시간으로 식별합니다.
 - **FatSecret API 연동**: 전 세계적으로 통용되는 영양 데이터베이스를 활용한 신뢰도 높은 정보 제공.
 - **Total Nutrition Report**: 한 접시에 담긴 여러 음식을 합산하여 총 칼로리와 탄단지 비율을 계산합니다.
 - **Interactive UI**: Streamlit을 통한 직관적이고 반응성이 뛰어난 사용자 경험.
@@ -28,12 +28,13 @@ YOLOv8 딥러닝 모델을 활용하여 사진 속 음식을 자동으로 인식
 
 ### 2. Confusion Matrix Analysis
 ![Confusion Matrix](assets/confusion_matrix_normalized.png)
-- 모델이 각 음식 클래스를 얼마나 정확하게 구분하는지 분석하였습니다. 
-- 대각선 행렬의 높은 활성화를 통해 대부분의 음식을 명확하게 분류하고 있음을 증명합니다.
+- **163 Class Classification**: 총 163종의 음식 클래스를 얼마나 정확하게 구분하는지 분석하였습니다. 
+- 대각선 행렬의 활성화를 통해 다양한 카테고리의 음식을 명확하게 분류하고 있음을 증명합니다.
 
-### 3. Dataset Distribution
+### 3. Dataset Analysis (Roboflow)
 ![Label Distribution](assets/labels.jpg)
-- Food-101 데이터셋을 기반으로 다양하고 균형 잡힌 학습 데이터를 구성하여 일반화 성능을 극대화하였습니다.
+- **Custom finalfood Dataset**: Roboflow를 통해 구축된 커스텀 데이터셋(finalfood)을 기반으로 학습되었습니다. 
+- 광범위한 데이터 증강(Augmentation)과 정밀한 라벨링을 통해 다양한 조명 및 각도에서도 높은 인식률을 보여줍니다.
 
 ---
 
@@ -41,15 +42,18 @@ YOLOv8 딥러닝 모델을 활용하여 사진 속 음식을 자동으로 인식
 - **Deep Learning**: Python, Ultralytics YOLOv8
 - **Frontend/Backend**: Streamlit
 - **API/Database**: FatSecret Platform API, JSON
-- **Data Processing**: PIL, NumPy, Pandas
+- **Data Processing**: PIL, NumPy, Pandas, OpenCV
+- **System Dependencies**: FFmpeg, LibGL1
 
 ---
 
 ## 📦 Installation & Setup
 
-1. **라이브러리 설치**
+1. **라이브러리 및 시스템 의존성 설치**
    ```bash
    pip install -r requirements.txt
+   # Linux/Docker 환경의 경우
+   cat packages.txt | xargs sudo apt-get install -y
    ```
 
 2. **환경 변수 설정 (`.env`)**
@@ -68,4 +72,4 @@ YOLOv8 딥러닝 모델을 활용하여 사진 속 음식을 자동으로 인식
 ## 👨‍💻 Author & Reference
 - **Developer**: 유재복 (Ash Fortune)
 - **Repository**: [GitHub Link Placeholder]
-- **Data Source**: Food-101 Dataset / FatSecret API
+- **Data Source**: Roboflow finalfood Dataset (163 Classes) / FatSecret API
