@@ -127,9 +127,13 @@ if uploaded_file is not None and model is not None:
                 total_info["protein"] += current_info.get("protein", 0)
                 total_info["fat"] += current_info.get("fat", 0)
                 
+                # 단위 정보가 없으면 로컬 DB 기준으로 '100g 기준' 부여
+                serving_unit = current_info.get("serving_desc", "100g 기준")
+                
                 detected_list.append({
                     "name": label_name,
-                    "cal": current_info.get("calories", 0)
+                    "cal": current_info.get("calories", 0),
+                    "unit": serving_unit
                 })
 
         # 7. 화면에 결과 표시
@@ -145,9 +149,9 @@ if uploaded_file is not None and model is not None:
             col4.metric("🥓 지방", f"{total_info['fat']:.1f} g")
 
             # 상세 목록 표시
-            with st.expander("🔍 상세 음식 목록 확인"):
+            with st.expander("🔍 상세 음식 목록 확인 (단위 정보 포함)"):
                 for item in detected_list:
-                    st.write(f"- **{item['name']}**: {item['cal']:.1f} kcal")
+                    st.write(f"- **{item['name']}**: {item['cal']:.1f} kcal *({item['unit']})*")
         else:
             st.warning("⚠️ 탐지된 음식들의 상세 영양 정보를 가져오지 못했습니다.")
             
